@@ -24,7 +24,10 @@ let path = {
   },
   clean: "./" + project_folder + "/",
 };
-let { src, dest } = require("gulp"),
+let {
+  src,
+  dest
+} = require("gulp"),
   gulp = require("gulp"),
   browsersync = require("browser-sync").create(),
   fileinclude = require("gulp-file-include"),
@@ -120,11 +123,9 @@ function images() {
     .pipe(
       imagemin({
         progressive: true,
-        svgoPlugins: [
-          {
-            removeVieBox: false,
-          },
-        ],
+        svgoPlugins: [{
+          removeVieBox: false,
+        }, ],
         interlaced: true,
         optimizationLevel: 3,
       })
@@ -166,7 +167,10 @@ gulp.task("svgSprite", function () {
 
 gulp.task("style", function () {
   return gulp
-    .src(["node_modules/rateyo/src/jquery.rateyo.css"])
+    .src([
+      "node_modules/rateyo/src/jquery.rateyo.css",
+      "node_modules/normalize.css/normalize.css",
+    ])
     .pipe(concat("libs.min.css"))
     .pipe(cssmin())
     .pipe(dest(path.build.css));
@@ -194,10 +198,10 @@ function fontsStyle(params) {
             fs.appendFile(
               source_folder + "/scss/fonts.scss",
               '@include font("' +
-                fontname +
-                '", "' +
-                fontname +
-                '", "400", "normal");\r\n',
+              fontname +
+              '", "' +
+              fontname +
+              '", "400", "normal");\r\n',
               cb
             );
           }
